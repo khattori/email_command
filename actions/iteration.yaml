@@ -6,6 +6,6 @@ enabled: true
 entry_point: "iteration.py"
 parameters:
     items:
-        type: "object"
+        type: "array"
         required: true
         position: 0
