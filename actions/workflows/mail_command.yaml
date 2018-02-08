@@ -18,6 +18,6 @@ chain:
         parameters:
             from: "stackstorm@fixpoint.co.jp"
             to: "{{ reply_to }}"
-            subject: "ホスト {{ node }} の検索に失敗"
-            body: "{{ node }} は未登録のホストです"
+            subject: "failed to search host: {{ node }}"
+            body: "{{ node }} is unregistered host"
 default: "search_host"
