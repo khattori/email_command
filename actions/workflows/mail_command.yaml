@@ -37,11 +37,14 @@ chain:
         on-failure: "exit_loop"
     -
         name: "execute_command"
-        ref: "core.local"
+        ref: "core.remote"
         parameters:
-            cmd: "echo {{ cmnd }}"
+            cmd: "{{ cmnd }}"
+            hosts: "{{ search_host.result.hostname }}"
+            username: "{{ search_host.result.username }}"
+            password: "{{ search_host.result.password }}"
         publish:
-            commands_result: "{{ commands_result }}result of '{{ cmnd }}':\n{{ execute_command.stdout }}\n'" 
+            commands_result: "{{ commands_result }}result of '{{ cmnd }}':\r\n{{ execute_command.stdout }}\r\n" 
         on-success: "loop_with_commands"
     -
         name: "exit_loop"
