@@ -1,0 +1,11 @@
+---
+name: "iteration"
+runner_type: "python-script"
+description: "Iteration with items"
+enabled: true
+entry_point: "iteration.py"
+parameters:
+    items:
+        type: "object"
+        required: true
+        position: 0

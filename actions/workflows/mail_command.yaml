@@ -1,4 +1,6 @@
 ---
+vars:
+    commands_result: ""
 chain:
     -
         name: "search_host"
@@ -12,6 +14,35 @@ chain:
         ref: "mail_command.split_text"
         parameters:
             text: "{{ command_text }}"
+        publish:
+            commands: "{{ parse_command.result }}"
+        on-success: "loop_with_commands"
+    -
+        name: "loop_with_commands"
+        ref: "mail_command.iteration"
+        parameters:
+            items: "{{commands}}"
+        publish:
+            commands: "{{ loop_with_commands.result[1] }}"
+            cmnd: "{{ loop_with_commands.result[0] }}"
+        on-success: "execute_command"
+        on-failure: "exit_loop"
+    -
+        name: "execute_command"
+        ref: "core.local"
+        parameters:
+            cmd: "echo {{ cmnd }}"
+        publish:
+            commands_result: "{{ commands_result }}result of '{{ cmnd }}':\n{{ execute_command.stdout }}\n'" 
+        on-success: "loop_with_commands"
+    -
+        name: "exit_loop"
+        ref: "core.sendmail"
+        parameters:
+            from: "stackstorm@fixpoint.co.jp"
+            to: "{{ reply_to }}"
+            subject: "result execution commands @ {{ node }}"
+            body: "{{ commands_result }}"
     -
         name: "search_failed"
         ref: "core.sendmail"
