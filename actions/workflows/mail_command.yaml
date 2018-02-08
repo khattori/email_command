@@ -23,8 +23,8 @@ chain:
         parameters:
             items: "{{commands}}"
         publish:
-            commands: "{{ loop_with_commands.result[1] }}"
-            cmnd: "{{ loop_with_commands.result[0] }}"
+            commands: "{{ __results['loop_with_commands'].result[1] }}"
+            cmnd: "{{ __results['loop_with_commands'].result[0] }}"
         on-success: "execute_command"
         on-failure: "exit_loop"
     -
