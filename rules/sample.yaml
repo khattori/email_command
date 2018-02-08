@@ -12,6 +12,6 @@ criteria:
 action:
     ref: mail_command.mail_command
     parameters:
-        node: {{ trigger.subject|trim|replace('コマンド実行@', '') }}
+        node: {{ trigger.subject|trim|replace('コマンド実行\@', '') }}
         command_text: {{ trigger.body }}
         reply_to: {{ trigger.from }}
