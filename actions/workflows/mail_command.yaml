@@ -1,0 +1,23 @@
+---
+chain:
+    -
+        name: "search_host"
+        ref: "st2.kv.get_object"
+        parameters:
+            key: "{{ node }}"
+        on-success: "parse_command"
+        on-failure: "search_failed"
+    -
+        name: "parse_command"
+        ref: "email_command.split_text"
+        parameters:
+            text: "{{ command_text }}"
+    -
+        name: "search_failed"
+        ref: "core.sendmail"
+        parameters:
+            from: "stackstorm@fixpoint.co.jp"
+            to: "{{ reply_to }}"
+            subject: "ホスト {{ node }} の検索に失敗"
+            body: "{{ node }} は未登録のホストです"
+default: "search_host"

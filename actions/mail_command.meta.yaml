@@ -1,0 +1,19 @@
+---
+name: "mail_command"
+description: "メールを受信したら本文に記載されているコマンドをサーバ上で実行して結果を送信する"
+runnter_type: "action-chain"
+entry_point: "workflows/mail_command.yaml"
+enabled: true
+parameters:
+  node:
+      type: "string"
+      required: true
+      description: "実行ノード名"
+  command_text:
+      type: "string"
+      required: true
+      description: "実行コマンド"
+  reply_to:
+      type: "string"
+      required: true
+      description: "返信先メールアドレス"
