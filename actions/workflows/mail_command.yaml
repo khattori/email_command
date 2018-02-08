@@ -9,7 +9,7 @@ chain:
         on-failure: "search_failed"
     -
         name: "parse_command"
-        ref: "email_command.split_text"
+        ref: "mail_command.split_text"
         parameters:
             text: "{{ command_text }}"
     -
