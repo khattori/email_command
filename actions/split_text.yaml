@@ -1,0 +1,12 @@
+---
+name: "split_text"
+runnter_type: "python-script"
+description: "Split into lines from text string (ignore empty line)"
+ienabled: true
+entry_point: "split_text.py"
+parameters:
+    text:
+        type: "string"
+        description: "Text to be splitted."
+        require: true
+        position: 0 
