@@ -44,7 +44,16 @@ chain:
             username: "{{ search_host.result.username }}"
             password: "{{ search_host.result.password }}"
         publish:
-            commands_result: "{{ commands_result }}result of '{{ cmnd }}':\r\n{{ execute_command.stdout }}\r\n" 
+            commands_result: "{{ commands_result }}result of '{{ cmnd }}':\r\n{{ execute_command[search_host.result.hostname].stdout }}\r\n" 
+        on-success: "loop_with_commands"
+        on-failure: "command_failed"
+    -
+        name: "command_failed"
+        ref: "core.local"
+        parameters:
+            cmnd: "echo failed execute: {{ cmnd }}"
+        publish:
+            commands_result: "{{ commands_result }}{{ command_failed.stdout }}\r\n" 
         on-success: "loop_with_commands"
     -
         name: "exit_loop"
