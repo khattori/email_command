@@ -3,6 +3,14 @@ vars:
     commands_result: ""
 chain:
     -
+        name: "parse_address"
+        ref: "mail_command.parse_address"
+        parameters:
+            address: "{{ reply_to }}"
+        publish:
+            reply_address: "{{ parse_address.result }}"
+        on-success: "search_host"
+    -
         name: "search_host"
         ref: "st2.kv.get_object"
         parameters:
@@ -40,7 +48,7 @@ chain:
         ref: "core.sendmail"
         parameters:
             from: "stackstorm@fixpoint.co.jp"
-            to: "{{ reply_to }}"
+            to: "{{ reply_address }}"
             subject: "result execution commands @ {{ node }}"
             body: "{{ commands_result }}"
     -
@@ -48,7 +56,7 @@ chain:
         ref: "core.sendmail"
         parameters:
             from: "stackstorm@fixpoint.co.jp"
-            to: "{{ reply_to }}"
+            to: "{{ reply_address }}"
             subject: "failed to search host: {{ node }}"
             body: "{{ node }} is unregistered host"
-default: "search_host"
+default: "parse_address"

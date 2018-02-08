@@ -1,0 +1,12 @@
+---
+name: "parse_address"
+runner_type: "python-script"
+description: "Parse email address"
+enabled: true
+entry_point: "parse_address.py"
+parameters:
+    address:
+        type: "string"
+        description: "email address field"
+        required: true
+        position: 0
