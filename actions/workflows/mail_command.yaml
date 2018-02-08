@@ -4,7 +4,7 @@ chain:
         name: "search_host"
         ref: "st2.kv.get_object"
         parameters:
-            key: "{{ node }}"
+            key: "config.nodes.{{ node }}"
         on-success: "parse_command"
         on-failure: "search_failed"
     -
