@@ -8,5 +8,5 @@ parameters:
     text:
         type: "string"
         description: "Text to be splitted."
-        require: true
-        position: 0 
+        required: true
+        position: 0
