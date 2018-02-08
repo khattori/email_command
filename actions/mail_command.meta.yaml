@@ -1,7 +1,7 @@
 ---
 name: "mail_command"
 description: "メールを受信したら本文に記載されているコマンドをサーバ上で実行して結果を送信する"
-runnter_type: "action-chain"
+runner_type: "action-chain"
 entry_point: "workflows/mail_command.yaml"
 enabled: true
 parameters:
