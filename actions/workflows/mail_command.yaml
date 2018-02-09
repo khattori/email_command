@@ -44,16 +44,16 @@ chain:
             username: "{{ search_host.result.username }}"
             password: "{{ search_host.result.password }}"
         publish:
-            commands_result: "{{ commands_result }}result of '{{ cmnd }}':\r\n{{ execute_command[search_host.result.hostname].stdout }}\r\n" 
+            commands_result: "{{ commands_result }}--------\r\n'{{ cmnd }}'実行結果:\r\n{{ execute_command[search_host.result.hostname].stdout }}\r\n" 
         on-success: "loop_with_commands"
         on-failure: "command_failed"
     -
         name: "command_failed"
         ref: "core.local"
         parameters:
-            cmnd: "echo failed execute: {{ cmnd }}"
+            cmnd: "echo コマンド実行失敗: {{ cmnd }}"
         publish:
-            commands_result: "{{ commands_result }}{{ command_failed.stdout }}\r\n" 
+            commands_result: "{{ commands_result }}--------\r\n{{ command_failed.stdout }}\r\n" 
         on-success: "loop_with_commands"
     -
         name: "exit_loop"
@@ -63,7 +63,7 @@ chain:
             email_from: "{{ config_context.sender_email_address }}"
             email_to:
                 - "{{ reply_address }}"
-            subject: "result execution commands @ {{ node }}"
+            subject: "コマンド実行結果 @ {{ node }}"
             message: "{{ commands_result }}"
             charset: "iso-2022-jp"
     -
@@ -74,7 +74,7 @@ chain:
             email_from: "{{ config_context.sender_email_address }}"
             email_to:
                 - "{{ reply_address }}"
-            subject: "failed to search host: {{ node }}"
-            message: "{{ node }} is unregistered host"
+            subject: "ホスト検索失敗: {{ node }}"
+            message: "{{ node }} は未登録のホストです"
             charset: "iso-2022-jp"
 default: "parse_address"
