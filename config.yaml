@@ -1,1 +1,10 @@
 ---
+smtp_account:
+    description: "SMTP account"
+    type: "string"
+    required: true
+sender_email_address:
+    description: "Sender e-mail address"
+    type: "string"
+    required: false
+    default: "stackstorm@fixpoint.co.jp"
