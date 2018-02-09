@@ -61,7 +61,8 @@ chain:
         parameters:
             account: "{{ config_context.smtp_account }}"
             email_from: "{{ config_context.sender_email_address }}"
-            email_to: "{{ reply_address }}"
+            email_to:
+                - "{{ reply_address }}"
             subject: "result execution commands @ {{ node }}"
             message: "{{ commands_result }}"
             charset: "iso-2022-jp"
@@ -71,7 +72,8 @@ chain:
         parameters:
             account: "{{ config_context.smtp_account }}"
             email_from: "{{ config_context.sender_email_address }}"
-            email_to: "{{ reply_address }}"
+            email_to:
+                - "{{ reply_address }}"
             subject: "failed to search host: {{ node }}"
             message: "{{ node }} is unregistered host"
             charset: "iso-2022-jp"
