@@ -1,6 +1,8 @@
 ---
 name: mail_command
-description: 受信したメールの本文に記載されているコマンドを、Subjectで指定したサーバ上で実行し、結果を返信するパッケージ
+description: |
+    受信したメールの本文に記載されているコマンドを、Subjectで指定した
+    サーバ上で実行し、結果を返信するパッケージ
 version: 0.1.0
 author: Kenta Hattori
 email: hattori@fixpoint.co.jp
