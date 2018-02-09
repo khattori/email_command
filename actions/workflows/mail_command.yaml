@@ -43,10 +43,14 @@ chain:
             hosts: "{{ search_host.result.hostname }}"
             username: "{{ search_host.result.username }}"
             password: "{{ search_host.result.password }}"
+        on-success: "command_success"
+        on-failure: "command_failed"
+    -
+        name: "command_success"
+        ref: "core.noop"
         publish:
             commands_result: "{{ commands_result }}\r\n--------\r\n'{{ cmnd }}'実行結果:\r\n{{ execute_command[search_host.result.hostname].stdout }}\r\n" 
         on-success: "loop_with_commands"
-        on-failure: "command_failed"
     -
         name: "command_failed"
         ref: "core.noop"
