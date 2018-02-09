@@ -51,7 +51,7 @@ chain:
         name: "command_failed"
         ref: "core.noop"
         publish:
-            commands_result: "{{ commands_result }}\r\n--------\r\n'{{ cmnd }}'実行失敗:\r\n{{ execute_command[search_host.result.hostname}.stderr }}\r\n" 
+            commands_result: "{{ commands_result }}\r\n--------\r\n'{{ cmnd }}'実行失敗:\r\n{{ execute_command[search_host.result.hostname].stderr }}\r\n" 
         on-success: "loop_with_commands"
     -
         name: "exit_loop"
