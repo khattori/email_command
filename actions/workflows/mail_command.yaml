@@ -3,14 +3,6 @@ vars:
     commands_result: "[コマンド実行結果]\r\n"
 chain:
     -
-        name: "parse_address"
-        ref: "mail_command.parse_address"
-        parameters:
-            address: "{{ reply_to }}"
-        publish:
-            reply_address: "{{ parse_address.result }}"
-        on-success: "search_host"
-    -
         name: "search_host"
         ref: "st2.kv.get_object"
         parameters:
@@ -64,7 +56,7 @@ chain:
             account: "{{ config_context.smtp_account }}"
             email_from: "{{ config_context.sender_email_address }}"
             email_to:
-                - "{{ reply_address }}"
+                - "{{ reply_to }}"
             subject: "コマンド実行結果 @ {{ node }}"
             message: "{{ commands_result }}"
             charset: "iso-2022-jp"
@@ -75,8 +67,8 @@ chain:
             account: "{{ config_context.smtp_account }}"
             email_from: "{{ config_context.sender_email_address }}"
             email_to:
-                - "{{ reply_address }}"
+                - "{{ reply_to }}"
             subject: "ホスト検索失敗: {{ node }}"
             message: "{{ node }} は未登録のホストです"
             charset: "iso-2022-jp"
-default: "parse_address"
+default: "search_host"
